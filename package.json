@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/vsp193/testes-javascript#readme",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "jest": "^23.5.0"
-  }
+  },
+  "dependencies": {}
 }
