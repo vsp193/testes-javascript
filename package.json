@@ -1,0 +1,22 @@
+{
+  "name": "testes-javascript",
+  "version": "1.0.0",
+  "description": "Projeto dedicado a exibição e exemplos de bibliotecas para testes automatizados em Javascript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vsp193/testes-javascript.git"
+  },
+  "author": "Vitor Spadacio Pisani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vsp193/testes-javascript/issues"
+  },
+  "homepage": "https://github.com/vsp193/testes-javascript#readme",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  }
+}
