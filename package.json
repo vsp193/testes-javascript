@@ -4,7 +4,7 @@
   "description": "Projeto dedicado a exibição e exemplos de bibliotecas para testes automatizados em Javascript.",
   "main": "index.js",
   "scripts": {
-    "start": "parcel site/index.html -d build/output --global contexto",
+    "start": "parcel site/index.html -d build/output",
     "test": "jest --watchAll"
   },
   "devDependencies": {

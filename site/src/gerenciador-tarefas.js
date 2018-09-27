@@ -1,31 +1,30 @@
-var jquery = require('jquery');
+import $ from 'jquery';
 
-function gerenaciadorTarefas() {
-  this.listaTarefas = [
-    { id: 1, titulo: 'Lavar a louça', foiFeita: false, lembrete: null },
-    { id: 2, titulo: 'Arrumar livros', foiFeita: false, lembrete: null },
-    { id: 3, titulo: 'Pagar boleto', foiFeita: true, lembrete: null }
-  ];
+export default class {
+  constructor() {
+    this.listaTarefas = [
+      { id: 1, titulo: 'Lavar a louça', foiFeita: false, lembrete: null },
+      { id: 2, titulo: 'Arrumar livros', foiFeita: false, lembrete: null },
+      { id: 3, titulo: 'Pagar boleto', foiFeita: true, lembrete: null }
+    ];
+  }  
 
-  this.carregarTarefas = function () {
-    const elementoListaTarefas = jquery('#lista-tarefas');
+  carregarTarefas() {
+    const elementoListaTarefas = $('#lista-tarefas');
 
-    // Limpa lista no carregamento
     elementoListaTarefas.html('');
 
-    // Itera sobre a lista de tarefas para carregar informações
     this.listaTarefas.forEach(tarefa => {
-      // Adiciona um elemento 
       elementoListaTarefas.append(criarElementoTarefa(tarefa));
     });
   };
 
-  this.adicionarTarefa = function () {
-    const elementoTituloTarefa = jquery('#titulo-tarefa');
+  adicionarTarefa() {
+    const elementoTituloTarefa = $('#titulo-tarefa');
     inserirTarefaNaListagem(elementoTituloTarefa.value);
   };
 
-  function criarElementoTarefa(tarefa) {
+  criarElementoTarefa(tarefa) {
     return `
     <li>
       <span>${tarefa.titulo}</span>
@@ -34,12 +33,12 @@ function gerenaciadorTarefas() {
   `;
   }
 
-  function tarefaFoiFeita(tarefa) {
+  tarefaFoiFeita(tarefa) {
     if (tarefa.foiFeita) return 'checked';
     else return '';
   }
 
-  function inserirTarefaNaListagem(titulo) {
+  inserirTarefaNaListagem(titulo) {
     const novaTarefa = {
       id: gerarNovoId(),
       titulo: titulo,
@@ -50,10 +49,8 @@ function gerenaciadorTarefas() {
     this.listaTarefas.push(novaTarefa);
   }
 
-  function gerarNovoId() {
+  gerarNovoId() {
     const indexUltimaTarefa = this.listaTarefas.length - 1;
     return this.listaTarefas[indexUltimaTarefa].id++;
   }
 }
-
-module.exports = gerenaciadorTarefas;
