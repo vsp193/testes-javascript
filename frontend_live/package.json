@@ -1,0 +1,19 @@
+{
+  "name": "frontend_live",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest --watchAll --coverage"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "jest": "^23.6.0",
+    "jquery": "^3.3.1",
+    "parcel": "^1.10.1"
+  }
+}

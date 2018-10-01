@@ -10706,60 +10706,85 @@ var GerenciadorTarefas =
 function () {
   function GerenciadorTarefas() {
     _classCallCheck(this, GerenciadorTarefas);
+
+    this.elementoBotaoAdicionarTarefa = '#adicionar-tarefa';
+    this.elementoAdicaoTituloTarefa = '#titulo-tarefa';
+    this.elementoBoasVindas = '#boas-vindas';
+    this.elementoListaTarefas = '#lista-tarefas';
+    this.elementoMensagemErro = '#mensagem-erro';
   }
 
   _createClass(GerenciadorTarefas, [{
     key: "inicializar",
     value: function inicializar() {
-      var _this = this;
-
       this.imprimirBemVindo();
       this.recarregarTarefas();
-      (0, _jquery.default)('#adicionar-tarefa').click(function () {
+      this.atribuirBindAElementos();
+    }
+  }, {
+    key: "atribuirBindAElementos",
+    value: function atribuirBindAElementos() {
+      var _this = this;
+
+      (0, _jquery.default)(this.elementoBotaoAdicionarTarefa).click(function () {
         return _this.adicionarTarefa();
+      });
+      (0, _jquery.default)('li input').click(function () {
+        return _this.atualizarTarefa();
       });
     }
   }, {
     key: "imprimirBemVindo",
     value: function imprimirBemVindo() {
-      (0, _jquery.default)('#boas-vindas').text('Seja bem-vindo ao Gerenciador de Tarefas, Mackenzie!');
+      (0, _jquery.default)(this.elementoBoasVindas).text('Seja bem-vindo ao Gerenciador de Tarefas!');
     }
   }, {
     key: "recarregarTarefas",
     value: function recarregarTarefas() {
       var _this2 = this;
 
-      var elementoListaTarefas = (0, _jquery.default)('#lista-tarefas');
-      elementoListaTarefas.html('');
-
-      _jquery.default.get('http://localhost:3000/tarefa', function (data) {
-        data.forEach(function (tarefa) {
-          elementoListaTarefas.append(_this2.criarElementoTarefa(tarefa));
-        });
+      (0, _jquery.default)(this.elementoListaTarefas).empty();
+      return _jquery.default.get('http://localhost:3000/tarefa').then(function (data) {
+        return _this2.imprimirTarefas(data);
       });
     }
   }, {
-    key: "adicionarTarefa",
-    value: function adicionarTarefa() {
+    key: "imprimirTarefas",
+    value: function imprimirTarefas(tarefas) {
       var _this3 = this;
 
-      var tituloNovaTarefa = (0, _jquery.default)('#titulo-tarefa').val();
-
-      _jquery.default.post('http://localhost:3000/tarefa', {
-        titulo: tituloNovaTarefa
-      }, function () {
-        return _this3.recarregarTarefas();
+      this.limparCampoAdicaoTarefa();
+      tarefas.forEach(function (tarefa) {
+        (0, _jquery.default)(_this3.elementoListaTarefas).append(_this3.criarElementoTarefa(tarefa));
       });
+    }
+  }, {
+    key: "limparCampoAdicaoTarefa",
+    value: function limparCampoAdicaoTarefa() {
+      (0, _jquery.default)(this.elementoAdicaoTituloTarefa).val('');
     }
   }, {
     key: "criarElementoTarefa",
     value: function criarElementoTarefa(tarefa) {
-      return "\n      <li id='tarefa-".concat(tarefa.id, "'>\n        <span>").concat(tarefa.titulo, "</span>\n        <input type='checkbox' ").concat(this.tarefaFoiFeita(tarefa), "/>\n      </li>\n    ");
+      return "\n      <li id='tarefa-".concat(tarefa.id, "'>\n        <span>").concat(tarefa.titulo, "</span>\n        <input type='checkbox' value='").concat(tarefa.id, "' ").concat(this.tarefaFoiFeita(tarefa), "/>\n      </li>\n    ");
     }
   }, {
     key: "tarefaFoiFeita",
     value: function tarefaFoiFeita(tarefa) {
       if (tarefa.foiFeita) return 'checked';else return '';
+    }
+  }, {
+    key: "adicionarTarefa",
+    value: function adicionarTarefa() {
+      var _this4 = this;
+
+      var tituloNovaTarefa = (0, _jquery.default)(this.elementoAdicaoTituloTarefa).val();
+      if (tituloNovaTarefa === '') return;
+      return _jquery.default.post('http://localhost:3000/tarefa', {
+        titulo: tituloNovaTarefa
+      }).then(function () {
+        return _this4.recarregarTarefas();
+      });
     }
   }]);
 
@@ -10803,7 +10828,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50997" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55769" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
